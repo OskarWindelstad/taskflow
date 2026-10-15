@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+target/
+frontend/node_modules/
+.DS_Store
+.idea/
+.idea/
+.DS_Store
+frontend/dist/

@@ -1,8 +1,8 @@
+
 package no.oskar.taskflow;
 
 import jakarta.persistence.*;
-import no.oskar.taskflow.Project;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
 
 @Entity
@@ -19,6 +19,11 @@ public class Task {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id")
     private Project project;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private AppUser owner;
 
     private String priority;
 
@@ -54,6 +59,14 @@ public class Task {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public AppUser getOwner() {
+        return owner;
+    }
+
+    public void setOwner(AppUser owner) {
+        this.owner = owner;
     }
 
     public String getPriority() {

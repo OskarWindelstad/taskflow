@@ -2,6 +2,7 @@
 package no.oskar.taskflow;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "projects")
@@ -15,6 +16,13 @@ public class Project {
     private String name;
 
     private String description;
+
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private AppUser owner;
+
 
     public Project() {
     }
@@ -42,5 +50,13 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public AppUser getOwner() {
+        return owner;
+    }
+
+    public void setOwner(AppUser owner) {
+        this.owner = owner;
     }
 }
